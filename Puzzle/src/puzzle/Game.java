@@ -42,18 +42,22 @@ public class Game extends javax.swing.JFrame {
     public Game(int type) {
         Color c = new Color(122, 94, 21);
         Color l = new Color(255, 255, 255);
+        Color tc = new Color(0, 0, 255);
         setContentPane(new JLabel(new ImageIcon(getClass().getResource("/imagenes/conf.png"))));
         initComponents();
+        jLabel1.setIcon(new ImageIcon(getClass().getResource("/imagenes/goal.jpg")));
         jToggleButton2.setBackground(c);
         jButton1.setBackground(c);
         jButton1.setForeground(l);
         jButton2.setBackground(c);
         jButton2.setForeground(l);
         jToggleButton2.setForeground(l);
-        this.tablero = new Tablero();
+        
+        this.tablero = new Tablero("a", 850764321);
         this.type = type;
-        this.tablero.setLocation(450, 200);
-        this.tablero.setSize(150, 150);
+        this.tablero.setLocation(500, 120);
+        this.tablero.setSize(350, 350);
+        this.tablero.setBackground(l);
         this.add(tablero);
 
     }
@@ -279,6 +283,7 @@ public class Game extends javax.swing.JFrame {
         jToggleButton2 = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -306,33 +311,31 @@ public class Game extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(78, 78, 78)
+                .addGap(152, 152, 152)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel11)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(699, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(371, 371, 371))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(400, 400, 400))))
+                    .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 239, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(231, 231, 231))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(113, 113, 113)
-                .addComponent(jLabel11)
-                .addGap(27, 27, 27)
-                .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(407, Short.MAX_VALUE))
+                .addGap(66, 66, 66)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(41, 41, 41)
+                        .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(383, Short.MAX_VALUE))
         );
 
         pack();
@@ -365,6 +368,7 @@ public class Game extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JToggleButton jToggleButton2;
     // End of variables declaration//GEN-END:variables

@@ -29,7 +29,8 @@ public class Tablero extends JPanel {
         int x, i = 0;
         this.fichas = new ArrayList<Ficha>();
         this.setLayout(new GridLayout(3, 3));
-        this.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        this.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        
         while (i < 9) {
             x = generarAleatorios(0, 8);
             Ficha f;
@@ -58,7 +59,8 @@ public class Tablero extends JPanel {
         int x;
         this.fichas = new ArrayList<>();
         this.setLayout(new GridLayout(3, 3));
-        this.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        this.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        
         for (int i = 0; i < 9; i++) {
             //this.fichas.add(new Ficha(a % 10));
             x= a%10;
@@ -113,9 +115,8 @@ public class Tablero extends JPanel {
         int x;
         this.fichas = new ArrayList<>();
         this.setLayout(new GridLayout(3, 3));
-        this.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        setBackground(Color.BLACK);
-            
+        this.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+                    
         for (int i = 0; i < 9; i++) {
             x = t.getFichas().get(i).numero;
             Ficha f;

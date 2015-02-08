@@ -6,6 +6,7 @@
 package puzzle;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
@@ -28,7 +29,9 @@ public class Ficha extends JLabel {
         if(this.numero==0)
              setBackground(Color.BLACK);
         else
-            setBackground(new java.awt.Color(204, 204, 204));
+            setBackground(new java.awt.Color(255, 255, 255));
+        setFont(new Font("Serif", Font.PLAIN, 50));
+     
         setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setPreferredSize(new java.awt.Dimension(50, 50));
