@@ -24,6 +24,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import sun.reflect.generics.tree.Tree;
 
 /**
  *
@@ -49,49 +50,41 @@ public class Game extends javax.swing.JFrame {
         jButton2.setBackground(c);
         jButton2.setForeground(l);
         jToggleButton2.setForeground(l);
-        this.tablero = new Tablero("a", 870251436);
+        this.tablero = new Tablero("a",857604321);
         this.type = type;
         this.tablero.setLocation(450, 200);
         this.tablero.setSize(150, 150);
         this.add(tablero);
-        
+
     }
 
     public void best_first_search() {
 
+        int id = 0, b = 1, padre;
         Tablero Meta = new Tablero("Goal");
         ArrayList<Tupla> Open = new ArrayList<>();
         ArrayList<Tupla> Close = new ArrayList<>();
-
-        Open.add(new Tupla(tablero, 0, type));
-
+        ArrayList<Nodo> Arbol = new ArrayList<>();
+        Tupla X = new Tupla(tablero, 0, type);
+        Arbol.add(new Nodo(id, X, 0));
+        Open.add(X);
         while (!Open.isEmpty()) {
-            
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                        
-            Tupla X = Open.remove(0);
-            this.tablero = new Tablero(X.getTablero());
-                        
-            for (int j = 0; j < 9; j++) {
 
-                System.out.print(tablero.fichas.get(j).getText());
-                if (j == 2 || j == 5) {
-                    System.out.println(" ");
-                }
-            }
-            System.out.println("\n" + X.getNivel());
-            System.out.println("\n" + X.getPeso() + "\n\n");
+            X = Open.remove(0);
+            int ind = Arbol.indexOf(new Nodo(X));
+            padre = Arbol.get(ind).getPadre();
 
             if (X.getTablero().equals(Meta)) {
                 System.out.println("GOOOOOOOOOOOOOOOOOOOOOAAAAAAAAAAAAL");
+                animacion(Arbol);
                 return;
             } else {
 
                 ArrayList<Tupla> hijos = generar_hijos(X.getTablero(), (X.getNivel() + 1), type);
+                for (Tupla t : hijos) {
+                    id++;
+                    Arbol.add(new Nodo(id, t, padre));
+                }
 
                 for (Tupla t : hijos) {
                     if (!(Open.contains(t) || Close.contains(t))) {
@@ -122,13 +115,27 @@ public class Game extends javax.swing.JFrame {
                     }
                 });
             }
-            tablero.setLocation(450, 200);
-            tablero.setSize(150, 150);
-            this.add(tablero);
-            repaint();
-            tablero.fichas.get(0).setText("0");
-            tablero.fichas.get(0).setText("" + tablero.fichas.get(0).numero);
+
+        }
+    }
+    public void buscarCamino(ArrayList<Nodo> Arbol){
+        Tablero Meta = new Tablero("Goal");
+        //int indice=Arbol.indexOf(num)
+    }
+    public void animacion(ArrayList<Nodo> Arbol) {
+        Tablero Meta = new Tablero("Goal");
+        for (Nodo n : Arbol) {
+            try {
+                Thread.sleep(750);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.tablero.cambiarFichas(n.getDato().getTablero());
             tablero.repaintFichas(tablero.fichas);
+            repaint();
+            if (tablero.equals(Meta)) {
+                return;
+            }
         }
     }
 
@@ -298,7 +305,7 @@ public class Game extends javax.swing.JFrame {
         Runnable miRunnable;
         miRunnable = new Runnable() {
             public void run() {
-                
+
                 best_first_search();
             }
         };

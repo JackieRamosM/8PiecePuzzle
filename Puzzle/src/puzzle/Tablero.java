@@ -34,7 +34,7 @@ public class Tablero extends JPanel {
             x = generarAleatorios(0, 8);
             Ficha f;
             if (x == 0) {
-                f = new Ficha(x, "0");
+                f = new Ficha(x," ");
             } else {
                 f = new Ficha(x, "" + x);
             }
@@ -64,7 +64,7 @@ public class Tablero extends JPanel {
             x= a%10;
             Ficha f;
             if (x == 0) {
-                f = new Ficha(x, "0");
+                f = new Ficha(x," ");
             } else {
                 f = new Ficha(x, "" + x);
             }
@@ -114,11 +114,13 @@ public class Tablero extends JPanel {
         this.fichas = new ArrayList<>();
         this.setLayout(new GridLayout(3, 3));
         this.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        setBackground(Color.BLACK);
+            
         for (int i = 0; i < 9; i++) {
             x = t.getFichas().get(i).numero;
             Ficha f;
             if (x == 0) {
-                f = new Ficha(x, "0");
+                f = new Ficha(x," ");
             } else {
                 f = new Ficha(x, "" + x);
             }
@@ -180,6 +182,19 @@ public class Tablero extends JPanel {
     public void repaintFichas(ArrayList<Ficha> fs) {
         for (Ficha ficha : fs) {
             ficha.repaint();
+        }
+    }
+    
+    public void cambiarFichas(Tablero t){
+        for (int i = 0; i < 9; i++) {
+            this.getFichas().get(i).setText(t.getFichas().get(i).getText());
+            this.getFichas().get(i).setNumero(t.getFichas().get(i).getNumero());
+            if(t.getFichas().get(i).getNumero()==0){
+                this.getFichas().get(i).setBackground(Color.BLACK);
+            }
+            else{
+                this.getFichas().get(i).setBackground(new java.awt.Color(204, 204, 204));
+            }
         }
     }
 
