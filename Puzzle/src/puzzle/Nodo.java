@@ -45,6 +45,14 @@ public class Nodo {
         this.Padre = Padre;
     }
 
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int Id) {
+        this.Id = Id;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -62,5 +70,5 @@ public class Nodo {
         final Nodo other = (Nodo) obj;
         return (other.getDato().getTablero().equals(this.Dato.getTablero()) && other.getDato().getPeso()==this.getDato().getPeso());
     }
-
+    
 }

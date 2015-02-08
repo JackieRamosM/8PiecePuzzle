@@ -50,7 +50,7 @@ public class Game extends javax.swing.JFrame {
         jButton2.setBackground(c);
         jButton2.setForeground(l);
         jToggleButton2.setForeground(l);
-        this.tablero = new Tablero("a",857604321);
+        this.tablero = new Tablero();
         this.type = type;
         this.tablero.setLocation(450, 200);
         this.tablero.setSize(150, 150);
@@ -72,11 +72,11 @@ public class Game extends javax.swing.JFrame {
 
             X = Open.remove(0);
             int ind = Arbol.indexOf(new Nodo(X));
-            padre = Arbol.get(ind).getPadre();
+            padre = Arbol.get(ind).getId();
 
             if (X.getTablero().equals(Meta)) {
                 System.out.println("GOOOOOOOOOOOOOOOOOOOOOAAAAAAAAAAAAL");
-                animacion(Arbol);
+                buscarCamino(Arbol);
                 return;
             } else {
 
@@ -118,15 +118,58 @@ public class Game extends javax.swing.JFrame {
 
         }
     }
-    public void buscarCamino(ArrayList<Nodo> Arbol){
-        Tablero Meta = new Tablero("Goal");
-        //int indice=Arbol.indexOf(num)
+
+    public int buscarMeta(Tablero Meta, ArrayList<Nodo> Arbol) {
+        int i = 0;
+        for (Nodo n : Arbol) {
+            if (n.getDato().getTablero().equals(Meta)) {
+                return i;
+            }
+            i++;
+        }
+        return 0;
     }
+
+    public void buscarCamino(ArrayList<Nodo> Arbol) {
+        ArrayList<Nodo> Solucion = new ArrayList<>();
+        Tablero Meta = new Tablero("Goal");
+        int indice = buscarMeta(Meta, Arbol);
+        int padre;
+        Nodo n = Arbol.get(indice);
+        Solucion.add(n);
+        do {
+            padre = n.getPadre();
+            n = buscarPadre(padre, Arbol);
+            if (n != null) {
+                Solucion = agregarSol(Solucion, n);
+            }
+        } while (padre!=0);
+        animacion(Solucion);
+    }
+
+    public ArrayList<Nodo> agregarSol(ArrayList<Nodo> Solucion, Nodo n) {
+        ArrayList<Nodo> Sol2 = new ArrayList<>();
+        Sol2.add(n);
+        for (Nodo n1 : Solucion) {
+            Sol2.add(n1);
+        }
+        return Sol2;
+    }
+
+    public Nodo buscarPadre(int padre, ArrayList<Nodo> Arbol) {
+        for (Nodo n : Arbol) {
+            if (n.getId()== padre) {
+                return n;
+            }
+        }
+        return null;
+    }
+
     public void animacion(ArrayList<Nodo> Arbol) {
         Tablero Meta = new Tablero("Goal");
         for (Nodo n : Arbol) {
             try {
-                Thread.sleep(750);
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             }
