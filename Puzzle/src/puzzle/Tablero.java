@@ -34,7 +34,7 @@ public class Tablero extends JPanel {
             x = generarAleatorios(0, 8);
             Ficha f;
             if (x == 0) {
-                f = new Ficha(x, "");
+                f = new Ficha(x, "0");
             } else {
                 f = new Ficha(x, "" + x);
             }
@@ -46,31 +46,75 @@ public class Tablero extends JPanel {
         }
     }
 
-    public Tablero(int n) {
+    public Tablero(String s) {
         this.fichas = new ArrayList<Ficha>();
         for (int i = 1; i < 9; i++) {
             this.fichas.add(new Ficha(i));
         }
         this.fichas.add(new Ficha(0));
     }
-    
-    public Tablero(String s) {
+
+    public Tablero(String s,int a) {
+     this.fichas = new ArrayList<Ficha>();
+     this.fichas.add(new Ficha(5));
+     this.fichas.add(new Ficha(3));
+     this.fichas.add(new Ficha(2));
+     this.fichas.add(new Ficha(4));
+     this.fichas.add(new Ficha(0));
+     this.fichas.add(new Ficha(6));
+     this.fichas.add(new Ficha(7));
+     this.fichas.add(new Ficha(1));
+     this.fichas.add(new Ficha(8));
+     }
+    public Tablero(int n) {
         this.fichas = new ArrayList<Ficha>();
-        this.fichas.add(new Ficha(2));
-        this.fichas.add(new Ficha(8));
-        this.fichas.add(new Ficha(3));
-        this.fichas.add(new Ficha(1));
-        this.fichas.add(new Ficha(6));
-        this.fichas.add(new Ficha(4));
-        this.fichas.add(new Ficha(7));
-        this.fichas.add(new Ficha(0));
-        this.fichas.add(new Ficha(5));
-    }
-    
-    public Tablero(Tablero t) {
-        this.fichas = new ArrayList<Ficha>();
+        switch (n) {
+            case 1:
+                n=432321210;
+                break;
+            case 2:
+                n=323212101;
+                break;
+            case 3:
+                n=234123012;
+                break;
+            case 4:
+                n=321210321;
+                break;
+            case 5:
+                n=212101212;
+                break;
+            case 6:
+                n=123012123;
+                break;
+            case 7:
+                n=210321432;
+                break;
+            case 8:
+                n=010212323;
+                break;
+        }
         for (int i = 0; i < 9; i++) {
-            this.fichas.add(new Ficha(t.fichas.get(i).getNumero()));
+            this.fichas.add(new Ficha(n % 10));
+            n = n / 10;
+        }
+    }
+
+    public Tablero(Tablero t) {
+        int x;        
+        this.fichas = new ArrayList<>();
+        this.setLayout(new GridLayout(3, 3));
+        this.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        for (int i = 0; i < 9; i++) {
+            x = t.getFichas().get(i).numero;
+            Ficha f;
+            if (x == 0) {
+                f = new Ficha(x, "0");
+            } else {
+                f = new Ficha(x, "" + x);
+            }
+            this.fichas.add(f);
+            add(f);
         }
     }
 
@@ -97,7 +141,7 @@ public class Tablero extends JPanel {
     @Override
     public String toString() {
         for (Ficha f : this.fichas) {
-            System.out.print(f.numero+" ");
+            System.out.print(f.numero + " ");
         }
         return " ";
     }
@@ -117,6 +161,11 @@ public class Tablero extends JPanel {
             }
         }
         return true;
+    }
+
+    @Override
+    public void repaint() {
+        super.repaint();
     }
 
 }

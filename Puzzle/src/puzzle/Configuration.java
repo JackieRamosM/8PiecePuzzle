@@ -6,6 +6,7 @@
 package puzzle;
 
 import java.awt.Color;
+import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -187,8 +188,25 @@ public class Configuration extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         this.setVisible(false);
-         new Game().setVisible(true);
+        this.setVisible(false);
+        if(modeOp.isSelected(jRadioButton3.getModel())){
+            if(heuristicOp.isSelected(jRadioButton1.getModel())){
+                new Game(1).setVisible(true);
+            }
+            else{
+                new Game(2).setVisible(true);    
+            }
+        }
+        else{
+            if(heuristicOp.isSelected(jRadioButton1.getModel())){
+                new Human(1).setVisible(true);
+            }
+            else{
+                new Human(2).setVisible(true);     
+            }
+        }
+        
+         
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

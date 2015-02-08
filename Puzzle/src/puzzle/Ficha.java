@@ -58,4 +58,7 @@ public class Ficha extends JLabel {
         return false;
     }
 
+    public void repaint(){
+        super.repaint();
+    }
 }
