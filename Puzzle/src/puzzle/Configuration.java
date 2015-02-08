@@ -6,9 +6,11 @@
 package puzzle;
 
 import java.awt.Color;
+import java.text.NumberFormat;
 import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.text.NumberFormatter;
 
 /**
  *
@@ -24,12 +26,17 @@ public class Configuration extends javax.swing.JFrame {
         Color l = new Color(255, 255, 255);
         setContentPane(new JLabel(new ImageIcon(getClass().getResource("/imagenes/conf.png"))));
         initComponents();
+        inipuzz.add(jRadioButton5);
+        inipuzz.add(jRadioButton6);
         jLabel2.setIcon(new ImageIcon(getClass().getResource("/imagenes/tab200.png")));
         jButton3.setBackground(c);
         jButton2.setBackground(c);
         jButton3.setForeground(l);
         jButton2.setForeground(l);
         setSize(1000, 612);
+        jRadioButton1.setSelected(true);
+        jRadioButton3.setSelected(true);
+        jRadioButton5.setSelected(true);
     }
 
     /**
@@ -43,6 +50,7 @@ public class Configuration extends javax.swing.JFrame {
 
         heuristicOp = new javax.swing.ButtonGroup();
         modeOp = new javax.swing.ButtonGroup();
+        inipuzz = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 100), new java.awt.Dimension(0, 100), new java.awt.Dimension(32767, 20));
         jLabel11 = new javax.swing.JLabel();
@@ -55,6 +63,10 @@ public class Configuration extends javax.swing.JFrame {
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jRadioButton5 = new javax.swing.JRadioButton();
+        jRadioButton6 = new javax.swing.JRadioButton();
+        jTextField1 = new javax.swing.JTextField();
 
         heuristicOp.add(jRadioButton1);
         heuristicOp.add(jRadioButton2);
@@ -77,7 +89,7 @@ public class Configuration extends javax.swing.JFrame {
         jLabel12.setText("Heuristic Function");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        jLabel13.setText("Mode");
+        jLabel13.setText("Initial Puzzle");
 
         jButton2.setText("CONTINUE");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -112,12 +124,38 @@ public class Configuration extends javax.swing.JFrame {
 
         jLabel2.setText("jLabel2");
 
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        jLabel14.setText("Mode");
+
+        jRadioButton5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jRadioButton5.setText("Fixed");
+        jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton5ActionPerformed(evt);
+            }
+        });
+
+        jRadioButton6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jRadioButton6.setText("Random");
+
+        jTextField1.setText("123406758");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(93, 93, 93)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,46 +164,55 @@ public class Configuration extends javax.swing.JFrame {
                                 .addGap(42, 42, 42))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)))
-                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(26, 26, 26)))
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
                             .addComponent(jLabel12)
                             .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2)
-                            .addComponent(jRadioButton3)
-                            .addComponent(jRadioButton4)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(86, 86, 86)
-                                .addComponent(jLabel11)))
-                        .addGap(231, 231, 231))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(73, 73, 73))))
+                                .addComponent(jLabel11))
+                            .addComponent(jRadioButton2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioButton4)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jRadioButton3))
+                                .addGap(120, 120, 120)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jRadioButton6)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jRadioButton5)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(45, 45, 45))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(73, 73, 73))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(110, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(121, 121, 121)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39))
+                        .addGap(99, 99, 99))
                     .addComponent(filler1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(65, 65, 65))
             .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
+                .addGap(80, 80, 80)
                 .addComponent(jLabel11)
                 .addGap(33, 33, 33)
                 .addComponent(jLabel12)
@@ -173,15 +220,25 @@ public class Configuration extends javax.swing.JFrame {
                 .addComponent(jRadioButton1)
                 .addGap(4, 4, 4)
                 .addComponent(jRadioButton2)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jRadioButton5)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextField1)
+                                .addGap(3, 3, 3)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jRadioButton6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jRadioButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButton4)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -189,24 +246,21 @@ public class Configuration extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.setVisible(false);
-        if(modeOp.isSelected(jRadioButton3.getModel())){
-            if(heuristicOp.isSelected(jRadioButton1.getModel())){
+        if (modeOp.isSelected(jRadioButton3.getModel())) {
+            if (heuristicOp.isSelected(jRadioButton1.getModel())) {
                 new Game(1).setVisible(true);
+            } else {
+                new Game(2).setVisible(true);
             }
-            else{
-                new Game(2).setVisible(true);    
-            }
-        }
-        else{
-            if(heuristicOp.isSelected(jRadioButton1.getModel())){
+        } else {
+            if (heuristicOp.isSelected(jRadioButton1.getModel())) {
                 new Human(1).setVisible(true);
-            }
-            else{
-                new Human(2).setVisible(true);     
+            } else {
+                new Human(2).setVisible(true);
             }
         }
-        
-         
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -218,6 +272,20 @@ public class Configuration extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
+    private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton5ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        // TODO add your handling code here:
+        
+
+    }//GEN-LAST:event_jTextField1KeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -226,17 +294,22 @@ public class Configuration extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.Box.Filler filler1;
     private javax.swing.ButtonGroup heuristicOp;
+    private javax.swing.ButtonGroup inipuzz;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JRadioButton jRadioButton6;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.ButtonGroup modeOp;
     // End of variables declaration//GEN-END:variables
 }

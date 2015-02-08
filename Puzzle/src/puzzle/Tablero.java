@@ -54,44 +54,53 @@ public class Tablero extends JPanel {
         this.fichas.add(new Ficha(0));
     }
 
-    public Tablero(String s,int a) {
-     this.fichas = new ArrayList<Ficha>();
-     this.fichas.add(new Ficha(5));
-     this.fichas.add(new Ficha(3));
-     this.fichas.add(new Ficha(2));
-     this.fichas.add(new Ficha(4));
-     this.fichas.add(new Ficha(0));
-     this.fichas.add(new Ficha(6));
-     this.fichas.add(new Ficha(7));
-     this.fichas.add(new Ficha(1));
-     this.fichas.add(new Ficha(8));
-     }
+    public Tablero(String s, int a) {
+        int x;
+        this.fichas = new ArrayList<>();
+        this.setLayout(new GridLayout(3, 3));
+        this.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        for (int i = 0; i < 9; i++) {
+            //this.fichas.add(new Ficha(a % 10));
+            x= a%10;
+            Ficha f;
+            if (x == 0) {
+                f = new Ficha(x, "0");
+            } else {
+                f = new Ficha(x, "" + x);
+            }
+            this.fichas.add(f);
+            add(f);
+            a = a / 10;
+        }
+
+    }
+
     public Tablero(int n) {
         this.fichas = new ArrayList<Ficha>();
         switch (n) {
             case 1:
-                n=432321210;
+                n = 432321210;
                 break;
             case 2:
-                n=323212101;
+                n = 323212101;
                 break;
             case 3:
-                n=234123012;
+                n = 234123012;
                 break;
             case 4:
-                n=321210321;
+                n = 321210321;
                 break;
             case 5:
-                n=212101212;
+                n = 212101212;
                 break;
             case 6:
-                n=123012123;
+                n = 123012123;
                 break;
             case 7:
-                n=210321432;
+                n = 210321432;
                 break;
             case 8:
-                n=010212323;
+                n = 010212323;
                 break;
         }
         for (int i = 0; i < 9; i++) {
@@ -101,7 +110,7 @@ public class Tablero extends JPanel {
     }
 
     public Tablero(Tablero t) {
-        int x;        
+        int x;
         this.fichas = new ArrayList<>();
         this.setLayout(new GridLayout(3, 3));
         this.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -166,6 +175,12 @@ public class Tablero extends JPanel {
     @Override
     public void repaint() {
         super.repaint();
+    }
+
+    public void repaintFichas(ArrayList<Ficha> fs) {
+        for (Ficha ficha : fs) {
+            ficha.repaint();
+        }
     }
 
 }

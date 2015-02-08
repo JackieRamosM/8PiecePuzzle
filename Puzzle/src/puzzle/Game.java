@@ -46,40 +46,36 @@ public class Game extends javax.swing.JFrame {
         jToggleButton2.setBackground(c);
         jButton1.setBackground(c);
         jButton1.setForeground(l);
+        jButton2.setBackground(c);
+        jButton2.setForeground(l);
         jToggleButton2.setForeground(l);
-        this.tablero = new Tablero();
+        this.tablero = new Tablero("a", 870251436);
         this.type = type;
-        tablero.setLocation(450, 200);
-        tablero.setSize(150, 150);
+        this.tablero.setLocation(450, 200);
+        this.tablero.setSize(150, 150);
         this.add(tablero);
-    }
-
-    public void actFrame() {
-
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                tablero.fichas.get(0).setText(num + "");
-                System.out.println(tablero.fichas.get(0).getText() + " ooooooooooooooooo");
-
-                invalidate();
-                revalidate();
-                repaint();
-            }
-        });
-
+        
     }
 
     public void best_first_search() {
+
         Tablero Meta = new Tablero("Goal");
         ArrayList<Tupla> Open = new ArrayList<>();
         ArrayList<Tupla> Close = new ArrayList<>();
 
         Open.add(new Tupla(tablero, 0, type));
-        while (!Open.isEmpty()) {
-            Tupla X = Open.remove(0);
-            tablero = new Tablero(X.getTablero());
 
+        while (!Open.isEmpty()) {
+            
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                        
+            Tupla X = Open.remove(0);
+            this.tablero = new Tablero(X.getTablero());
+                        
             for (int j = 0; j < 9; j++) {
 
                 System.out.print(tablero.fichas.get(j).getText());
@@ -126,6 +122,13 @@ public class Game extends javax.swing.JFrame {
                     }
                 });
             }
+            tablero.setLocation(450, 200);
+            tablero.setSize(150, 150);
+            this.add(tablero);
+            repaint();
+            tablero.fichas.get(0).setText("0");
+            tablero.fichas.get(0).setText("" + tablero.fichas.get(0).numero);
+            tablero.repaintFichas(tablero.fichas);
         }
     }
 
@@ -153,6 +156,14 @@ public class Game extends javax.swing.JFrame {
             }
         }
         return indice;
+    }
+
+    public Tablero getTablero() {
+        return tablero;
+    }
+
+    public void setTablero(Tablero tablero) {
+        this.tablero = tablero;
     }
 
     public ArrayList<Integer> vecinos(int cero) {
@@ -233,7 +244,7 @@ public class Game extends javax.swing.JFrame {
 
         jButton1.setText("SEE RESOLUTION TREE");
 
-        jButton2.setText("INCIAR");
+        jButton2.setText("START");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -257,8 +268,8 @@ public class Game extends javax.swing.JFrame {
                         .addComponent(jLabel11)
                         .addGap(371, 371, 371))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(424, 424, 424))))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(400, 400, 400))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,9 +280,9 @@ public class Game extends javax.swing.JFrame {
                 .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(136, 136, 136)
-                .addComponent(jButton2)
-                .addContainerGap(367, Short.MAX_VALUE))
+                .addGap(69, 69, 69)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(407, Short.MAX_VALUE))
         );
 
         pack();
@@ -283,8 +294,18 @@ public class Game extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-         best_first_search();
+
+        Runnable miRunnable;
+        miRunnable = new Runnable() {
+            public void run() {
+                
+                best_first_search();
+            }
+        };
+
+        Thread hilo = new Thread(miRunnable);
+        hilo.start();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -298,24 +319,4 @@ public class Game extends javax.swing.JFrame {
     private javax.swing.JToggleButton jToggleButton2;
     // End of variables declaration//GEN-END:variables
 
-    class AnswerWorker extends SwingWorker<Integer, Integer> {
-
-        @Override
-        protected Integer doInBackground() throws Exception {
-            // Do a time-consuming task.
-            System.out.println("bbbbbbbbbb ");
-           // Thread.sleep(1000);
-            return 45;
-        }
-
-        @Override
-        protected void done() {
-            try {
-                tablero.fichas.get(0).setText("13");
-                System.out.println("aaaaaaaaaaa ");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }
