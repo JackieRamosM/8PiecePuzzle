@@ -38,7 +38,7 @@ public class Configuration extends javax.swing.JFrame {
         jButton3.setForeground(l);
         jButton2.setForeground(l);
         setSize(1000, 612);
-        jRadioButton1.setSelected(true);
+        jRadioButton2.setSelected(true);
         jRadioButton3.setSelected(true);
         jRadioButton5.setSelected(true);
     }
@@ -191,7 +191,7 @@ public class Configuration extends javax.swing.JFrame {
         jRadioButton6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jRadioButton6.setText("Random");
 
-        jTextField1.setText("123406758");
+        jTextField1.setText("563417082");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
