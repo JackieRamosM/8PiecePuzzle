@@ -7,6 +7,8 @@ package puzzle;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +22,7 @@ import javax.swing.border.Border;
 /**
  *
  */
-public class Tablero extends JPanel {
+public class Tablero extends JPanel implements MouseListener{
 
     ArrayList<Ficha> fichas;
 
@@ -29,8 +31,7 @@ public class Tablero extends JPanel {
         int x, i = 0;
         this.fichas = new ArrayList<Ficha>();
         this.setLayout(new GridLayout(3, 3));
-        this.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
-        
+        this.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         while (i < 9) {
             x = generarAleatorios(0, 8);
             Ficha f;
@@ -45,6 +46,7 @@ public class Tablero extends JPanel {
                 i++;
             }
         }
+        addMouseListener(this);
     }
 
     public Tablero(String s) {
@@ -53,14 +55,14 @@ public class Tablero extends JPanel {
             this.fichas.add(new Ficha(i));
         }
         this.fichas.add(new Ficha(0));
+        addMouseListener(this);
     }
 
     public Tablero(String s, int a) {
         int x;
         this.fichas = new ArrayList<>();
         this.setLayout(new GridLayout(3, 3));
-        this.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
-        
+        this.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         for (int i = 0; i < 9; i++) {
             //this.fichas.add(new Ficha(a % 10));
             x= a%10;
@@ -74,7 +76,7 @@ public class Tablero extends JPanel {
             add(f);
             a = a / 10;
         }
-
+        addMouseListener(this);
     }
 
     public Tablero(int n) {
@@ -109,14 +111,16 @@ public class Tablero extends JPanel {
             this.fichas.add(new Ficha(n % 10));
             n = n / 10;
         }
+        addMouseListener(this);
     }
 
     public Tablero(Tablero t) {
         int x;
         this.fichas = new ArrayList<>();
         this.setLayout(new GridLayout(3, 3));
-        this.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
-                    
+        this.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        setBackground(Color.BLACK);
+            
         for (int i = 0; i < 9; i++) {
             x = t.getFichas().get(i).numero;
             Ficha f;
@@ -128,6 +132,7 @@ public class Tablero extends JPanel {
             this.fichas.add(f);
             add(f);
         }
+        addMouseListener(this);
     }
 
     public int generarAleatorios(int min, int max) {
@@ -197,6 +202,103 @@ public class Tablero extends JPanel {
                 this.getFichas().get(i).setBackground(new java.awt.Color(204, 204, 204));
             }
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        Tablero Meta = new Tablero("Goal");
+        for (Ficha f : this.getFichas()) {
+            if(e.getX()>=f.getX() && e.getX()<=(f.getX()+116) && e.getY()>=f.getY() && e.getY()<=f.getY()+116){
+                 if (f.getNumero() != 0) {
+                    ArrayList<Integer> vecinos = verificarVecinos(this.getFichas().indexOf(f));
+                    for (int i : vecinos) {
+                        if (this.getFichas().get(i).numero == 0) {
+                            this.getFichas().get(i).numero= f.numero;
+                            this.getFichas().get(i).setText(f.getText());
+                            this.getFichas().get(i).setBackground(new java.awt.Color(204, 204, 204));
+                            f.numero = 0;
+                            f.setText(" ");
+                            f.setBackground(Color.BLACK);
+                            this.repaintFichas(this.fichas);
+                            repaint();
+                            if (this.equals(Meta)) {
+                                
+                                return;
+                            }
+                        }
+                    }
+                 }
+            } 
+            if(f.getNumero()!=0)
+                f.setBackground(new java.awt.Color(204, 204, 204));
+        }
+        this.repaintFichas(this.fichas);
+        repaint();
+    }
+    private ArrayList<Integer> verificarVecinos(int numero) {
+        ArrayList<Integer> vecinos = new ArrayList<>();
+        switch (numero) {
+            case 0:
+                vecinos.add(3);
+                vecinos.add(1);
+                break;
+            case 1:
+                vecinos.add(0);
+                vecinos.add(4);
+                vecinos.add(2);
+                break;
+            case 2:
+                vecinos.add(5);
+                vecinos.add(1);
+                break;
+            case 3:
+                vecinos.add(0);
+                vecinos.add(4);
+                vecinos.add(6);
+                break;
+            case 4:
+                vecinos.add(1);
+                vecinos.add(3);
+                vecinos.add(5);
+                vecinos.add(7);
+                break;
+            case 5:
+                vecinos.add(8);
+                vecinos.add(4);
+                vecinos.add(2);
+                break;
+            case 6:
+                vecinos.add(7);
+                vecinos.add(3);
+                break;
+            case 7:
+                vecinos.add(6);
+                vecinos.add(4);
+                vecinos.add(8);
+                break;
+            case 8:
+                vecinos.add(7);
+                vecinos.add(5);
+                break;
+        }
+        return vecinos;
+    }
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 
 }

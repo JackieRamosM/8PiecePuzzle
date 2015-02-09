@@ -29,9 +29,8 @@ public class Ficha extends JLabel {
         if(this.numero==0)
              setBackground(Color.BLACK);
         else
-            setBackground(new java.awt.Color(255, 255, 255));
+            setBackground(new java.awt.Color(204, 204, 204));
         setFont(new Font("Serif", Font.PLAIN, 50));
-     
         setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setPreferredSize(new java.awt.Dimension(50, 50));
@@ -64,4 +63,12 @@ public class Ficha extends JLabel {
     public void repaint(){
         super.repaint();
     }
+
+    @Override
+    public String toString() {
+        return "" + numero ;
+    }
+
+    
+    
 }

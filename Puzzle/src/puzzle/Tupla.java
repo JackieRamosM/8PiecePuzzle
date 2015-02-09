@@ -102,4 +102,13 @@ public class Tupla {
         Tablero tab = new Tablero(numero);
         return tab.getFichas().get(index1).numero;
     }
+
+    @Override
+    public String toString() {
+        return tablero.fichas.get(0)+","+tablero.fichas.get(1)+","+tablero.fichas.get(2)+" \\ "+
+                tablero.fichas.get(3)+","+tablero.fichas.get(4)+","+tablero.fichas.get(5)+" \\ "+
+                tablero.fichas.get(6)+","+tablero.fichas.get(7)+","+tablero.fichas.get(8)+"";
+    }
+    
+    
 }

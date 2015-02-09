@@ -59,7 +59,7 @@ public class Home extends javax.swing.JFrame {
         });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jButton2.setText("INSTRUCTIONS");
+        jButton2.setText("ABOUT");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -78,7 +78,6 @@ public class Home extends javax.swing.JFrame {
         jLabel1.setText("PUZZLE");
 
         jLabel2.setBackground(new java.awt.Color(255, 102, 0));
-        jLabel2.setText("jLabel2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
