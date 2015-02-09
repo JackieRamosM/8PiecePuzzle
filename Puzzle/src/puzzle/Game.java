@@ -34,12 +34,11 @@ public class Game extends javax.swing.JFrame {
 
     Tablero tablero;
     int type;
-    int num = 13;
 
     /**
      * Creates new form Game
      */
-    public Game(int type) {
+    public Game(int type, int tabinicial) {
         Color c = new Color(122, 94, 21);
         Color l = new Color(255, 255, 255);
         Color tc = new Color(0, 0, 255);
@@ -52,10 +51,15 @@ public class Game extends javax.swing.JFrame {
         jButton2.setBackground(c);
         jButton2.setForeground(l);
         jToggleButton2.setForeground(l);
-        
-        this.tablero = new Tablero("a", 850764321);
+
+        if (tabinicial == 0) {
+            this.tablero = new Tablero();
+        } else {
+            int in = invertirnum(tabinicial);
+            this.tablero = new Tablero("a", in);
+        }
         this.type = type;
-        this.tablero.setLocation(500, 120);
+        this.tablero.setLocation(508, 120);
         this.tablero.setSize(350, 350);
         this.tablero.setBackground(l);
         this.add(tablero);
@@ -147,7 +151,7 @@ public class Game extends javax.swing.JFrame {
             if (n != null) {
                 Solucion = agregarSol(Solucion, n);
             }
-        } while (padre!=0);
+        } while (padre != 0);
         animacion(Solucion);
     }
 
@@ -162,7 +166,7 @@ public class Game extends javax.swing.JFrame {
 
     public Nodo buscarPadre(int padre, ArrayList<Nodo> Arbol) {
         for (Nodo n : Arbol) {
-            if (n.getId()== padre) {
+            if (n.getId() == padre) {
                 return n;
             }
         }
@@ -373,4 +377,13 @@ public class Game extends javax.swing.JFrame {
     private javax.swing.JToggleButton jToggleButton2;
     // End of variables declaration//GEN-END:variables
 
+    private int invertirnum(int tabinicial) {
+        int inv = 0;
+        for (int i = 0; i < 9; i++) {
+            inv = inv * 10;
+            inv = inv + (tabinicial % 10);
+            tabinicial = tabinicial / 10;
+        }
+        return inv;
+    }
 }
